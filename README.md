@@ -15,3 +15,7 @@ username:password@host:port
 * **`localhost`**: alamat server broker—di sini artinya komputer lokal Anda.
 * **`5672`**: nomor port TCP di mana broker mendengarkan koneksi AMQP (standar AMQP).
 
+## Gambar
+
+### 1. Membuka Rabbit MQ
+![Gambar1](publisher\Gambar\Gambar_1.png)
