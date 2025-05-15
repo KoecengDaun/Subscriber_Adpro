@@ -1,7 +1,9 @@
-**a. Apa itu AMQP?**
+## **a. Apa itu AMQP?**
+
 AMQP (Advanced Message Queuing Protocol) adalah protokol terbuka untuk pertukaran pesan di aplikasi. Dengan AMQP, satu sistem (producer) mengirim pesan ke broker (misalnya RabbitMQ), lalu sistem lain (consumer) mengambil dan memproses pesan itu—tanpa perlu tahu detail implementasi masing-masing.
 
-**b. Penjelasan `guest:guest@localhost:5672`**
+## **b. Penjelasan `guest:guest@localhost:5672`**
+
 Format umumnya:
 
 ```
