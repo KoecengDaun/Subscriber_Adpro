@@ -17,7 +17,7 @@ impl MessageHandler<UserCreatedEventMessage> for UserCreatedHandler {
 
         let now = time::Instant::now();
 
-        println!("2306244892 [129500004y], Message received: {:?}", message);
+        println!("In Ade’s Computer [2306244892], Message received: {:?}", message);
 
         thread::sleep(ten_millis);
         println!("Processed in {:?}", now.elapsed());
