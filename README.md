@@ -23,3 +23,29 @@ username:password@host:port
 Di mesin saya saya melihat 2 queues, yaitu:
 - user_created – queue utama tempat subscriber menunggu pesan.
 - user_created_dlx (dead-letter queue) – otomatis dibuat karena opsi use_dead_letter: true.
+
+### 2. Simulasi Menjalankan 3 Sekaligus
+![Gambar2](<Gambar/Screenshot 2025-05-15 194348.png>)
+![Gambar3](<Gambar/Screenshot 2025-05-15 194419.png>)
+
+### 3. Refleksi & Perbaikan
+
+1. Load Balancing Consumer
+- Dengan 3 subscriber, broker mendistribusikan pesan round-robin ke tiap consumer.
+- Terlihat beberapa spike paralel sesuai jumlah instance.
+
+2. Prefetch Count
+- Default prefetch = unlimited → consumer dapat mengambil banyak pesan sekaligus.
+- Perbaikan: atur basic_qos(prefetch_count) agar tiap subscriber tidak overfetch.
+
+3. Durability & Auto-delete
+- Saat ini auto_delete: false dan durable: false.
+- Perbaikan: set durable: true agar queue bertahan restart broker, dan auto_delete: true jika ingin queue otomatis hilang saat semua consumer disconnect.
+
+4. Error Handling & Retry
+- Kode saat ini hanya unwrap() dan panic on error.
+- Perbaikan: tangani error di connect/publish/listen dengan retry/backoff.
+
+5. Concurrency di Subscriber
+- Saat ini subscriber memproses satu pesan per thread.
+- Perbaikan: spawn worker pool atau gunakan async runtime (tokio::spawn) untuk memproses pesan paralel tanpa blocking utama.
